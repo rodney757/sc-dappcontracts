@@ -6,7 +6,7 @@ import '../installed_contracts/zeppelin/contracts/ownership/Ownable.sol';
 import './DealForTwoEnumerable.sol';
 
 contract DealForTwoFactory is DealForTwoEnumerable {
-	event NewDealForTwo(address dealForTwoAddress);
+	event NewDealForTwo(string _dealid);
 
 	struct dealStruct {
 		DealStatuses status;
@@ -39,6 +39,7 @@ contract DealForTwoFactory is DealForTwoEnumerable {
 
 		// if it's funded - fill in the details
 		deals[sha3(msg.sender,_dealid)] = dealStruct(DealStatuses.Open,hashtag.commission(),_offerValue,0);
+		NewDealForTwo(_dealid);
 	}
 
 	function cancelDeal(string _dealid){
